@@ -7,9 +7,9 @@ app.use(bodyParser.json());
 
 let todos = [];
 
-function findIndex(arr, id) {
+function findIndex(arr, todoID) {
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === id) return i;
+        if (arr[i].todoID === todoID) return i;
     }
     return -1;
 }
@@ -63,7 +63,7 @@ app.put('/todos/:todoID', (req, res) => {
 app.delete('/todos/:todoID', (req, res) => {
     const todoIndex = findIndex(todos, parseInt(req.params.todoID));
     if (todoIndex === -1) {
-        res.status(404).send();
+        res.status(404).send('Error! Not Present');
     }
     else {
         todos = removeAtIndex(todos, todoIndex);
